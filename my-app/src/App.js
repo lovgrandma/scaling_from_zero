@@ -1,29 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-import Component from './components/Component';
+import './App.scss'
+import 'sass'
+import Chat from './components/Chat'
+
+// Try to make a horizontal menu at top with Chat, About, Contact
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        {/* <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>Hello World!</p>
-        <p>Time to take over the world with AI!</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
-        <Component />
-      </header>
-    </div>
-  );
+	<div>
+		<header>
+		</header>
+		<body>
+			<div className='container'>
+				<div className='cta_container'>
+					<h1>AI Chat Bot</h1>
+					<p>Chat bot to answer all of your needs regarding house cleaning</p>
+				</div>
+				<Chat />
+			</div>
+		</body>
+	</div>
+  )
 }
 
 export default App;

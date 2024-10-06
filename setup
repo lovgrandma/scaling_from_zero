@@ -1,0 +1,12 @@
+my-app folder Initial Setup (Frontend)
+1. Install git from https://git-scm.com/downloads
+2. Install node.js from https://nodejs.org/en
+3. Create a folder to be used for this project and open in Visual Studio Code
+    -> Click File -> Open Folder
+4. Run: git init
+5. Run: git remote add origin https://github.com/lovgrandma/scaling_from_zero
+6. Install React 
+7. npm run start
+
+Learn React
+https://react.dev/learn
