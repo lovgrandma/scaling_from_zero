@@ -8,5 +8,9 @@ my-app folder Initial Setup (Frontend)
 6. Install React 
 7. npm run start
 
+Setup git
+1. git branch --set-upstream-to origin/master
+2. git pull
+
 Learn React
 https://react.dev/learn

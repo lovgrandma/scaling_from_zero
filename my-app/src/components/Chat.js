@@ -1,8 +1,7 @@
 import React from 'react'
 
-export default () => {
+export default props => {
     const [ log, setLog ] = React.useState([])
-    const [ username, setUsername ] = React.useState(null)
     const chatRef = React.useRef()
 
     const submitChat = value => {
@@ -27,18 +26,6 @@ export default () => {
         }
     })
 
-    const handleSignIn = React.useCallback(e => {
-        setUsername('MyUser')
-    })
-
-    React.useEffect(() => {
-        console.log('Use Effect 1', log)
-    }, [ log ])
-
-    React.useEffect(() => {
-        console.log('Use Effect 2', username)
-    }, [ username ])
-
     const chat = React.useMemo(() => (
         <div>
             {
@@ -52,21 +39,27 @@ export default () => {
     // Add functionality to add user location info City, Country, Postal Code and paint to DOM
     // Change each chat log such that it shows the users name in normal size text and city in small text
     
+    console.log('Props', props)
     return (
-        <div>
-            <h1>Chat</h1>
-            {
-                !username
-                    ? <div style={{ display: 'flex', gap: '.5rem' }}>
-                        <label>Start your chat</label>
-                        <button onClick={handleSignIn}>Sign In</button>
-                    </div>
-                    : <div>
-                        {chat}
-                        <input type='text' ref={chatRef} onKeyDown={handleChatInput} />
-                        <button onClick={handleSendChat}>Send</button>
-                    </div>
-            }
+        <div className='container'>
+            <div className='cta_container'>
+                <h1>AI Chat Bot</h1>
+                <p>Chat bot to answer all of your needs regarding house cleaning</p>
+            </div>
+            <div>
+                <h1>Chat</h1>
+                {
+                    !props.username
+                        ? <div>
+                            <label>Sign in to use the chat</label>
+                        </div>
+                        : <div>
+                            {chat}
+                            <input type='text' ref={chatRef} onKeyDown={handleChatInput} />
+                            <button onClick={handleSendChat}>Send</button>
+                        </div>
+                }
+            </div>
         </div>
     )
 }

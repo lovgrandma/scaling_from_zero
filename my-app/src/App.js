@@ -1,25 +1,59 @@
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
 import './App.scss'
 import 'sass'
-import Chat from './components/Chat'
+import Components from './Components'
 
 // Try to make a horizontal menu at top with Chat, About, Contact
 
-function App() {
-  return (
-	<div>
-		<header>
-		</header>
-		<body>
-			<div className='container'>
-				<div className='cta_container'>
-					<h1>AI Chat Bot</h1>
-					<p>Chat bot to answer all of your needs regarding house cleaning</p>
-				</div>
-				<Chat />
-			</div>
-		</body>
-	</div>
-  )
+export default props => {
+	const [ username, setUsername ] = React.useState(null) // Sign in state
+	const [ session, setSession ] = React.useState(null)
+
+	const handleSignIn = React.useCallback(e => {
+		const o = {
+			username: 'MyUser'
+		}
+		localStorage.setItem('session', JSON.stringify(o))
+        setUsername('MyUser')
+    })
+
+	React.useEffect(() => {
+		if (window?.localStorage) {
+			const temp = window?.localStorage?.getItem('session')
+			if (temp) {
+				const parsed = JSON.parse(temp)
+				if (parsed?.username) {
+					setUsername(parsed.username)
+				}
+				if (parsed) {
+					setSession(parsed)
+				}
+			}
+		}
+	}, [ username ])
+
+	// checkMobile Object ... isIos, isAndroid, model
+	// canPlayVideo ... hasInteracted, iOS - HLS, Anything MpegDASH
+	// EventListener Global
+
+	return (
+		<React.Fragment>
+			<header>
+			</header>
+			<body>
+				{
+					!username
+						? <button onClick={handleSignIn}>Sign In</button>
+						: null
+				}
+				<Routes>
+					<Route path='/' element={<Components.Main { ...props } username={username} />}/>
+					<Route path='/chat' element={<Components.Chat { ...props } username={username} />}/>
+					<Route path='/anime' element={<Components.Anime { ...props } username={username} />}/>
+				</Routes>
+			</body>
+		</React.Fragment>
+	)
 }
 
-export default App;
