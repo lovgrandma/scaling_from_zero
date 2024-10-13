@@ -14,3 +14,23 @@ Setup git
 
 Learn React
 https://react.dev/learn
+
+Git Help
+
+# Shows all branches
+git branch -a
+
+# Create new branch
+git checkout -b <name_of_my_branch>
+
+# Add changes
+git add .
+
+# Commit changes
+git commit -a
+
+# Checkout specific branch
+git checkout 
+
+# Pull new changes
+git pull
