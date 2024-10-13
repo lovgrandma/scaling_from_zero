@@ -1,4 +1,5 @@
 import React from 'react'
+import { get } from '../utility'
 
 export default props => {
     const [ componentDidMount, setComponentDidMount ] = React.useState(false)
@@ -13,25 +14,14 @@ export default props => {
     }, [ componentDidMount ])
 
     const getDefaults = async () => {
-        const r = await fetch("https://pokeapi.co/api/v2/pokemon/", {
-            method: "GET",
-            redirect: "follow"
-        }).then(res => res.text())
-        .then(data => data)
-        .catch(err => console.error(err))
+        const r = await get('https://pokeapi.co/api/v2/pokemon/')
         const parsed = JSON.parse(r)
-        console.log('Pokemon', parsed, typeof r, typeof parsed)
     }
 
     const handleLoadPokemon = React.useCallback(async e => {
         const p = pokemonSearchRef?.current?.value
         if (p) {
-            const r = await fetch(`https://pokeapi.co/api/v2/pokemon/${p}`, {
-                method: "GET",
-                redirect: "follow"
-                }).then(res => res.text())
-                .then(data => data)
-                .catch(err => console.error(err))
+            const r = await get(`https://pokeapi.co/api/v2/pokemon/${p}`)
             const parsed = JSON.parse(r)
             setCurrentPokemon(parsed)
             console.log('r', parsed)
