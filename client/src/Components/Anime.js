@@ -21,7 +21,7 @@ export default props => {
     const handleLoadPokemon = React.useCallback(async e => {
         const p = pokemonSearchRef?.current?.value
         if (p) {
-            const r = await get(`https://pokeapi.co/api/v2/pokemon/${p}`)
+            const r = await get(`http://localhost:5000/job?jobs=${p}`)
             const parsed = JSON.parse(r)
             setCurrentPokemon(parsed)
             console.log('r', parsed)
