@@ -1,5 +1,5 @@
 import React from 'react'
-import { get } from '../utility'
+import { get, post } from '../utility'
 
 export default props => {
     const [ componentDidMount, setComponentDidMount ] = React.useState(false)
@@ -27,6 +27,17 @@ export default props => {
             console.log('r', parsed)
         }
     })
+
+    async function handleAdd(e) {
+        const m = e?.currentTarget?.getAttribute('modif')
+        console.log(m)
+        const r = await post('http://localhost:5000/add', {
+            item: m
+        })
+        console.log(r, 'Added!')
+    }
+
+    console.log(currentPokemon)
     
     return (
         <div>
@@ -34,18 +45,21 @@ export default props => {
             <input type='text' ref={pokemonSearchRef} />
             <button onClick={handleLoadPokemon}>Search</button>
             {
-                currentPokemon
-                    ? <div>
-                        <h3>{currentPokemon?.name.charAt(0).toUpperCase()}{currentPokemon?.name.substring(1, currentPokemon?.name?.length)}</h3>
-                        {
-                            currentPokemon?.stats?.map((m, i) => (
-                                <div key={i}>
-                                    <div>{m?.stat?.name}</div>
-                                    <div>{m?.base_stat}</div>
-                                </div>
-                            ))
-                        }
-                    </div>
+                currentPokemon?.map
+                    ? currentPokemon.map(m => (
+                        <div>
+                            <h3>{m?.name.charAt(0).toUpperCase()}{m?.name.substring(1, m?.name?.length)}</h3>
+                            <button onClick={handleAdd} modif={m.name}>Add</button>
+                            {
+                                m?.stats?.map((m, i) => (
+                                    <div key={i}>
+                                        <div>{m?.stat?.name}</div>
+                                        <div>{m?.base_stat}</div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    ))
                     : null
             }
         </div>
