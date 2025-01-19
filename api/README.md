@@ -1,8 +1,8 @@
-# Create virtual environment
-python -m venv scaling-api
-
 # Go to path
 cd api
+
+# Create virtual environment
+python -m venv scaling-api
 
 # Activate environment
 source scaling-api/Scripts/activate
